@@ -1,0 +1,241 @@
+Year,Kick,Team,Opponent,Kicker,Position,Keeper,Scored
+1982,1,West Germany,France,Kaltz,Defender,Ettori,TRUE
+1982,1,France,West Germany,Giresse,Midfielder,Schumacher,TRUE
+1982,2,West Germany,France,Breitner,Midfielder,Ettori,TRUE
+1982,2,France,West Germany,Amoros,Defender,Schumacher,TRUE
+1982,3,West Germany,France,Stielike,Defender,Ettori,FALSE
+1982,3,France,West Germany,Rocheteau,Midfielder,Schumacher,TRUE
+1982,4,West Germany,France,Littbarski,Midfielder,Ettori,TRUE
+1982,4,France,West Germany,Six,Midfielder,Schumacher,FALSE
+1982,5,West Germany,France,Rummenigge,Forward,Ettori,TRUE
+1982,5,France,West Germany,Platini,Midfielder,Schumacher,TRUE
+1982,6,West Germany,France,Hrubesch,Forward,Ettori,TRUE
+1982,6,France,West Germany,Bossis,Defender,Schumacher,FALSE
+1986,1,Brasil,France,Socrates,Midfielder,Bats,FALSE
+1986,1,France,Brasil,Stopyra,Forward,Carlos,TRUE
+1986,2,Brasil,France,Alemão,Midfielder,Bats,TRUE
+1986,2,France,Brasil,Amoros,Defender,Carlos,TRUE
+1986,3,Brasil,France,Zico,Forward,Bats,TRUE
+1986,3,France,Brasil,Bellone,Forward,Carlos,TRUE
+1986,4,Brasil,France,Branco,Defender,Bats,TRUE
+1986,4,France,Brasil,Platini,Midfielder,Carlos,FALSE
+1986,5,Brasil,France,Júlio César,Defender,Bats,FALSE
+1986,5,France,Brasil,Fernández,Midfielder,Carlos,TRUE
+1986,1,West Germany,Mexico,Allofs,Forward,Larios,TRUE
+1986,1,Mexico,West Germany,Negrete,Forward,Schumacher,TRUE
+1986,2,West Germany,Mexico,Brehme,Defender,Larios,TRUE
+1986,2,Mexico,West Germany,Quirarte,Defender,Schumacher,FALSE
+1986,3,West Germany,Mexico,Matthäus,Midfielder,Larios,TRUE
+1986,3,Mexico,West Germany,Servín,Defender,Schumacher,FALSE
+1986,4,West Germany,Mexico,Littbarski,Midfielder,Larios,TRUE
+1986,1,Spain,Belgium,Señor,Midfielder,Pfaff,TRUE
+1986,1,Belgium,Spain,Claesen,Forward,Zubizarreta,TRUE
+1986,2,Spain,Belgium,Eloy,Forward,Pfaff,FALSE
+1986,2,Belgium,Spain,Scifo,Midfielder,Zubizarreta,TRUE
+1986,3,Spain,Belgium,Chendo,Defender,Pfaff,TRUE
+1986,3,Belgium,Spain,Broos,Defender,Zubizarreta,TRUE
+1986,4,Spain,Belgium,Butragueño,Forward,Pfaff,TRUE
+1986,4,Belgium,Spain,Vervoort,Midfielder,Zubizarreta,TRUE
+1986,5,Spain,Belgium,Víctor,Defender,Pfaff,TRUE
+1986,5,Belgium,Spain,Van Der Elst,Defender,Zubizarreta,TRUE
+1990,1,Republic of Ireland,Romania,Sheedy,Midfielder,Lung,TRUE
+1990,1,Romania,Republic of Ireland,Hagi,Midfielder,Bonner,TRUE
+1990,2,Republic of Ireland,Romania,Houghton,Midfielder,Lung,TRUE
+1990,2,Romania,Republic of Ireland,Lupu,Midfielder,Bonner,TRUE
+1990,3,Republic of Ireland,Romania,Townsend,Midfielder,Lung,TRUE
+1990,3,Romania,Republic of Ireland,Rotariu,Midfielder,Bonner,TRUE
+1990,4,Republic of Ireland,Romania,Cascarino,Forward,Lung,TRUE
+1990,4,Romania,Republic of Ireland,Lupescu,Defender,Bonner,TRUE
+1990,5,Republic of Ireland,Romania,O'Leary,Defender,Lung,TRUE
+1990,5,Romania,Republic of Ireland,Timofte,Midfielder,Bonner,FALSE
+1990,1,Argentina,Yugoslavia,Serrizuela,Defender,Ivkovi?,TRUE
+1990,1,Yugoslavia,Argentina,Stojkovi?,Midfielder,Goycochea,FALSE
+1990,2,Argentina,Yugoslavia,Burruchaga,Midfielder,Ivkovi?,TRUE
+1990,2,Yugoslavia,Argentina,Prosine?ki,Midfielder,Goycochea,TRUE
+1990,3,Argentina,Yugoslavia,Maradona,Forward,Ivkovi?,FALSE
+1990,3,Yugoslavia,Argentina,Savi?evi?,Midfielder,Goycochea,TRUE
+1990,4,Argentina,Yugoslavia,Troglio,Midfielder,Ivkovi?,FALSE
+1990,4,Yugoslavia,Argentina,Brnovi?,Midfielder,Goycochea,FALSE
+1990,5,Argentina,Yugoslavia,Dezotti,Forward,Ivkovi?,TRUE
+1990,5,Yugoslavia,Argentina,Hadžibegi?,Defender,Goycochea,FALSE
+1990,1,Argentina,Italy,Baresi,Defender,Zenga,TRUE
+1990,1,Italy,Argentina,Serrizuela,Defender,Goycochea,TRUE
+1990,2,Argentina,Italy,Baggio,Forward,Zenga,TRUE
+1990,2,Italy,Argentina,Burruchaga,Midfielder,Goycochea,TRUE
+1990,3,Argentina,Italy,De Agostini,Midfielder,Zenga,TRUE
+1990,3,Italy,Argentina,Olarticoechea,Midfielder,Goycochea,TRUE
+1990,4,Argentina,Italy,Donadoni,Midfielder,Zenga,FALSE
+1990,4,Italy,Argentina,Maradona,Forward,Goycochea,TRUE
+1990,5,Argentina,Italy,Serena,Midfielder,Zenga,FALSE
+1990,1,England,West Germany,Lineker,Forward,Illgner,TRUE
+1990,1,West Germany,England,Brehme,Defender,Shilton,TRUE
+1990,2,England,West Germany,Beardsley,Midfielder,Illgner,TRUE
+1990,2,West Germany,England,Matthäus,Midfielder,Shilton,TRUE
+1990,3,England,West Germany,Platt,Midfielder,Illgner,TRUE
+1990,3,West Germany,England,Riedle,Forward,Shilton,TRUE
+1990,4,England,West Germany,Pearce,Defender,Illgner,FALSE
+1990,4,West Germany,England,Thon,Midfielder,Shilton,TRUE
+1990,5,England,West Germany,Waddle,Midfielder,Illgner,FALSE
+1994,1,Mexico,Bulgaria,García Aspe,Midfielder,Mikhailov,FALSE
+1994,1,Bulgaria,Mexico,Balakov,Midfielder,Campos,FALSE
+1994,2,Mexico,Bulgaria,Bernal,Midfielder,Mikhailov,FALSE
+1994,2,Bulgaria,Mexico,Guentchev,Midfielder,Campos,TRUE
+1994,3,Mexico,Bulgaria,Rodríguez,Midfielder,Mikhailov,FALSE
+1994,3,Bulgaria,Mexico,Borimirov,Midfielder,Campos,TRUE
+1994,4,Mexico,Bulgaria,Suarez,Defender,Mikhailov,TRUE
+1994,4,Bulgaria,Mexico,Letchkov,Midfielder,Campos,TRUE
+1994,1,Romania,Sweden,R?ducioiu,Forward,Ravelli,TRUE
+1994,1,Sweden,Romania,Mild,Midfielder,Prunea,FALSE
+1994,2,Romania,Sweden,Hagi,Midfielder,Ravelli,TRUE
+1994,2,Sweden,Romania,Andersson,Forward,Prunea,TRUE
+1994,3,Romania,Sweden,Lupescu,Midfielder,Ravelli,TRUE
+1994,3,Sweden,Romania,Brolin,Midfielder,Prunea,TRUE
+1994,4,Romania,Sweden,Petrescu,Defender,Ravelli,FALSE
+1994,4,Sweden,Romania,Ingesson,Midfielder,Prunea,TRUE
+1994,5,Romania,Sweden,Dumitrescu,Midfielder,Ravelli,TRUE
+1994,5,Sweden,Romania,Nilsson,Defender,Prunea,TRUE
+1994,6,Romania,Sweden,Belodedici,Midfielder,Ravelli,FALSE
+1994,6,Sweden,Romania,Larsson,Forward,Prunea,TRUE
+1994,1,Italy,Brasil,Baresi,Defender,Taffarel,FALSE
+1994,1,Brasil,Italy,Márcio Santos,Defender,Pagliuca,FALSE
+1994,2,Italy,Brasil,Albertini,Midfielder,Taffarel,TRUE
+1994,2,Brasil,Italy,Romario,Forward,Pagliuca,TRUE
+1994,3,Italy,Brasil,Evani,Midfielder,Taffarel,TRUE
+1994,3,Brasil,Italy,Branco,Defender,Pagliuca,TRUE
+1994,4,Italy,Brasil,Massaro,Forward,Taffarel,FALSE
+1994,4,Brasil,Italy,Dunga,Midfielder,Pagliuca,TRUE
+1994,5,Italy,Brasil,Baggio,Forward,Taffarel,FALSE
+1998,1,Argentina,England,Berti,Midfielder,Seaman,TRUE
+1998,1,England,Argentina,Shearer,Forward,Roa,TRUE
+1998,2,Argentina,England,Crespo,Forward,Seaman,FALSE
+1998,2,England,Argentina,Ince,Midfielder,Roa,FALSE
+1998,3,Argentina,England,Verón,Midfielder,Seaman,TRUE
+1998,3,England,Argentina,Merson,Midfielder,Roa,TRUE
+1998,4,Argentina,England,Gallardo,Midfielder,Seaman,TRUE
+1998,4,England,Argentina,Owen,Forward,Roa,TRUE
+1998,5,Argentina,England,Ayala,Defender,Seaman,TRUE
+1998,5,England,Argentina,Batty,Midfielder,Roa,FALSE
+1998,1,Italy,France,Baggio,Forward,Barthez,TRUE
+1998,1,France,Italy,Zidane,Midfielder,Pagliuca,TRUE
+1998,2,Italy,France,Albertini,Midfielder,Barthez,FALSE
+1998,2,France,Italy,Lizarazu,Defender,Pagliuca,FALSE
+1998,3,Italy,France,Costacurta,Defender,Barthez,TRUE
+1998,3,France,Italy,Trezeguet,Forward,Pagliuca,TRUE
+1998,4,Italy,France,Vieri,Forward,Barthez,TRUE
+1998,4,France,Italy,Henry,Forward,Pagliuca,TRUE
+1998,5,Italy,France,Di Biagio,Midfielder,Barthez,FALSE
+1998,5,France,Italy,Blanc,Defender,Pagliuca,TRUE
+1998,1,Brasil,Netherlands,Ronaldo,Forward,van der Sar,TRUE
+1998,1,Netherlands,Brasil,F. de Boer,Defender,Taffarel,TRUE
+1998,2,Brasil,Netherlands,Rivaldo,Midfielder,van der Sar,TRUE
+1998,2,Netherlands,Brasil,Bergkamp,Forward,Taffarel,TRUE
+1998,3,Brasil,Netherlands,Emerson,Midfielder,van der Sar,TRUE
+1998,3,Netherlands,Brasil,Cocu,Defender,Taffarel,FALSE
+1998,4,Brasil,Netherlands,Dunga,Midfielder,van der Sar,TRUE
+1998,4,Netherlands,Brasil,R. de Boer,Midfielder,Taffarel,FALSE
+2002,1,Spain,Republic of Ireland,Hierro,Defender,Given,TRUE
+2002,1,Republic of Ireland,Spain,Keane,Forward,Casillas,TRUE
+2002,2,Spain,Republic of Ireland,Baraja,Midfielder,Given,TRUE
+2002,2,Republic of Ireland,Spain,Holland,Midfielder,Casillas,FALSE
+2002,3,Spain,Republic of Ireland,Juanfran,Defender,Given,FALSE
+2002,3,Republic of Ireland,Spain,Connolly,Forward,Casillas,FALSE
+2002,4,Spain,Republic of Ireland,Valerón,Midfielder,Given,FALSE
+2002,4,Republic of Ireland,Spain,Kilbane,Midfielder,Casillas,FALSE
+2002,5,Spain,Republic of Ireland,Mendieta ,Midfielder,Given,TRUE
+2002,5,Republic of Ireland,Spain,Finnan,Defender,Casillas,TRUE
+2002,1,South Korea,Spain,Hwang,Forward,Casillas,TRUE
+2002,1,Spain,South Korea,Hierro,Defender,Lee,TRUE
+2002,2,South Korea,Spain,Park,Forward,Casillas,TRUE
+2002,2,Spain,South Korea,Baraja,Midfielder,Lee,TRUE
+2002,3,South Korea,Spain,Seol,Forward,Casillas,TRUE
+2002,3,Spain,South Korea,Xavi,Midfielder,Lee,TRUE
+2002,4,South Korea,Spain,Ahn,Forward,Casillas,TRUE
+2002,4,Spain,South Korea,Joaquín,Midfielder,Lee,FALSE
+2002,5,South Korea,Spain,Hong,Defender,Casillas,TRUE
+2006,1,Ukraine,Switzerland,Shevchenko,Forward,Zuberbühler,FALSE
+2006,1,Switzerland,Ukraine,Strella,Forward,Shovkovskiy,FALSE
+2006,2,Ukraine,Switzerland,Milevskiy,Forward,Zuberbühler,TRUE
+2006,2,Switzerland,Ukraine,Barnetta,Midfielder,Shovkovskiy,FALSE
+2006,3,Ukraine,Switzerland,Rebrov,Forward,Zuberbühler,TRUE
+2006,3,Switzerland,Ukraine,Cabanas,Midfielder,Shovkovskiy,FALSE
+2006,4,Ukraine,Switzerland,Husyev,Defender,Zuberbühler,TRUE
+2006,1,Germany,Argentina,Neuville,Forward,Franco,TRUE
+2006,1,Argentina,Germany,Cruz,Forward,Lehmann,TRUE
+2006,2,Germany,Argentina,Ballack,Midfielder,Franco,TRUE
+2006,2,Argentina,Germany,Ayala,Defender,Lehmann,TRUE
+2006,3,Germany,Argentina,Podolski,Forward,Franco,TRUE
+2006,3,Argentina,Germany,Rodríguez,Midfielder,Lehmann,TRUE
+2006,4,Germany,Argentina,Borowski,Midfielder,Franco,TRUE
+2006,4,Argentina,Germany,Cambiasso,Midfielder,Lehmann,TRUE
+2006,1,Portugal,England,Simão,Forward,Robinson,TRUE
+2006,1,England,Portugal,Lampard,Midfielder,Ricardo,FALSE
+2006,2,Portugal,England,Viana,Midfielder,Robinson,FALSE
+2006,2,England,Portugal,Hargreaves,Midfielder,Ricardo,TRUE
+2006,3,Portugal,England,Petit,Midfielder,Robinson,FALSE
+2006,3,England,Portugal,Gerrard,Midfielder,Ricardo,FALSE
+2006,4,Portugal,England,Postiga,Forward,Robinson,TRUE
+2006,4,England,Portugal,Carragher,Defender,Ricardo,FALSE
+2006,5,Portugal,England,Ronaldo,Midfielder,Robinson,TRUE
+2006,1,Italy,France,Pirlo,Midfielder,Barthez,TRUE
+2006,1,France,Italy,Wiltord,Forward,Buffon,TRUE
+2006,2,Italy,France,Materazzi,Defender,Barthez,TRUE
+2006,2,France,Italy,Trezeguet,Forward,Buffon,FALSE
+2006,3,Italy,France,De Rossi,Midfielder,Barthez,TRUE
+2006,3,France,Italy,Abidal,Defender,Buffon,TRUE
+2006,4,Italy,France,Del Piero,Forward,Barthez,TRUE
+2006,4,France,Italy,Sagnol,Defender,Buffon,TRUE
+2006,5,Italy,France,Grosso,Defender,Barthez,TRUE
+2010,1,Paraguay,Japan,Barreto,Midfielder,Kawashima,TRUE
+2010,1,Japan,Paraguay,End?,Midfielder,Villar,TRUE
+2010,2,Paraguay,Japan,Barrios,Forward,Kawashima,TRUE
+2010,2,Japan,Paraguay,Hasebe,Midfielder,Villar,TRUE
+2010,3,Paraguay,Japan,Riveros,Midfielder,Kawashima,TRUE
+2010,3,Japan,Paraguay,Komano,Defender,Villar,FALSE
+2010,4,Paraguay,Japan,Valdez,Forward,Kawashima,TRUE
+2010,4,Japan,Paraguay,Honda,Forward,Villar,TRUE
+2010,5,Paraguay,Japan,Cardozo,Forward,Kawashima,TRUE
+2010,1,Uruguay,Ghana,Forlán,Forward,Kingson,TRUE
+2010,1,Ghana,Uruguay,Gyan,Forward,Muslera,TRUE
+2010,2,Uruguay,Ghana,Victorino,Defender,Kingson,TRUE
+2010,2,Ghana,Uruguay,Appiah,Midfielder,Muslera,TRUE
+2010,3,Uruguay,Ghana,Scotti,Defender,Kingson,TRUE
+2010,3,Ghana,Uruguay,Mensah,Defender,Muslera,FALSE
+2010,4,Uruguay,Ghana,Pereira,Defender,Kingson,FALSE
+2010,4,Ghana,Uruguay,Adiyiah,Forward,Muslera,FALSE
+2010,5,Uruguay,Ghana,Abreu,Forward,Kingson,TRUE
+2014,1,Brasil,Chile,Luiz,Defender,Bravo,TRUE
+2014,1,Chile,Brasil,Pinilla,Forward,Júlio César,FALSE
+2014,2,Brasil,Chile,Willian,Midfielder,Bravo,FALSE
+2014,2,Chile,Brasil,Sánchez,Forward,Júlio César,FALSE
+2014,3,Brasil,Chile,Marcelo,Defender,Bravo,TRUE
+2014,3,Chile,Brasil,Aránguiz,Midfielder,Júlio César,TRUE
+2014,4,Brasil,Chile,Hulk,Midfielder,Bravo,FALSE
+2014,4,Chile,Brasil,Díaz,Midfielder,Júlio César,TRUE
+2014,5,Brasil,Chile,Neymar,Midfielder,Bravo,TRUE
+2014,5,Chile,Brasil,Jara,Defender,Júlio César,FALSE
+2014,1,Costa Rica,Greece,Borges,Midfielder,Karnezis,TRUE
+2014,1,Greece,Costa Rica,Mitroglou,Forward,Navas,TRUE
+2014,2,Costa Rica,Greece,Ruiz,Midfielder,Karnezis,TRUE
+2014,2,Greece,Costa Rica,Christodoulopoulos,Midfielder,Navas,TRUE
+2014,3,Costa Rica,Greece,González,Defender,Karnezis,TRUE
+2014,3,Greece,Costa Rica,Holebas,Defender,Navas,TRUE
+2014,4,Costa Rica,Greece,Campbell ,Forward,Karnezis,TRUE
+2014,4,Greece,Costa Rica,Gekas,Forward,Navas,FALSE
+2014,5,Costa Rica,Greece,Umaña,Defender,Karnezis,TRUE
+2014,1,Costa Rica,Netherlands,Borges,Midfielder,Krul,TRUE
+2014,1,Netherlands,Costa Rica,Van Persie,Forward,Navas,TRUE
+2014,2,Costa Rica,Netherlands,Ruiz,Midfielder,Krul,FALSE
+2014,2,Netherlands,Costa Rica,Robben,Midfielder,Navas,TRUE
+2014,3,Costa Rica,Netherlands,González,Defender,Krul,TRUE
+2014,3,Netherlands,Costa Rica,Sneijder,Midfielder,Navas,TRUE
+2014,4,Costa Rica,Netherlands,Bolaños,Midfielder,Krul,TRUE
+2014,4,Netherlands,Costa Rica,Kuyt,Defender,Navas,TRUE
+2014,5,Costa Rica,Netherlands,Umaña,Defender,Krul,FALSE
+2014,1,Netherlands,Argentina,Vlaar,Defender,Romero,FALSE
+2014,1,Argentina,Netherlands,Messi,Forward,Cillessen,TRUE
+2014,2,Netherlands,Argentina,Robben,Forward,Romero,TRUE
+2014,2,Argentina,Netherlands,Garay,Defender,Cillessen,TRUE
+2014,3,Netherlands,Argentina,Sneijder,Midfielder,Romero,FALSE
+2014,3,Argentina,Netherlands,Agüero,Forward,Cillessen,TRUE
+2014,4,Netherlands,Argentina,Kuyt,Defender,Romero,TRUE
+2014,4,Argentina,Netherlands,Rodríguez,Midfielder,Cillessen,TRUE
