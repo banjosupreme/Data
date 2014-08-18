@@ -1,0 +1,195 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="wally.css">
+    <script type = "text/javascript" src ="d3/d3.js"></script>
+    <script type="text/javascript" src="emissions.CO2data.js"></script>
+
+</head>
+<body>
+    <script type = "text/javascript">
+
+     var big15 = ["UnitedStatesofAmerica", "China", "Japan", "Germany", "France", "UnitedKingdom","Brazil","RussianFederation","Italy","India","Canada","Australia","Spain","Mexico", "KoreaSouth",
+                    "Indonesia", "Turkey", "Netherlands", "SaudiArabia", "Switzerland", "Iran" , "Sweden", "Norway", "Poland","Belgium", "Argentina", "Austria", "Thailand", "SouthAfrica", "UnitedArabEmirates"];
+                    
+     var colours = {UnitedStatesofAmerica: "#1f77b4", China: "#ff7f0e", Japan: "#0033FF", Germany: "#9933CC", France: "#A27AFE", UnitedKingdom: "#8c564b",Brazil: "#e377c2",RussianFederation: "#CC6666",Italy: "#bcbd22",
+                    India: "#17becf",Canada: "#9467bd" ,Australia: "#7f7f7f" ,Spain: "#FF99FF", Mexico: "#99CCFF", KoreaSouth: "#663366", Indonesia: "#993300", Turkey: "#999900", Netherlands: "#FF8C00", SaudiArabia: "#556B2F",
+                    Switzerland: "#008B8B", Iran: "#d62728", Sweden: "#FFFF00", Norway: "#000066", Poland: "#CC3333", Belgium: "#00CC00", Argentina: "#2ca02c", Austria: "#660000", Thailand: "#6600FF" , SouthAfrica: "FFCC66", UnitedArabEmirates: "#FFCCFF"   };
+     
+     var orig = {UnitedStatesofAmerica: 0, China: 1, Japan: 2, Germany: 3, France: 4, UnitedKingdom: 5,Brazil: 6,RussianFederation: 7,Italy: 8,India: 9,Canada: 10,Australia: 11,Spain: 12,Mexico: 13, KoreaSouth: 14,
+                 Indonesia: 15, Turkey: 16, Netherlands: 17, SaudiArabia: 18, Switzerland: 19, Iran: 20, Sweden: 21, Norway: 22, Poland: 23, Belgium: 24, Argentina: 25, Austria: 26, Thailand: 27, SouthAfrica: 28, UnitedArabEmirates: 29};
+                    
+     var axscale, ayscale;
+     var animYear = 1965;
+     
+     var plotw = 0.95*screen.width;
+     var ploth = 0.4*screen.height;
+     var slack = 0.2*screen.height;
+     var svgh = 0.6*screen.height;
+     
+     var dataset, cPops;
+     
+     var plotData;
+     
+     var cPop = function(yearData)
+     {
+        var outArray = new Array(yearData.length + 1);
+        sum = 0;
+    
+        for(var j = 0; j < yearData.length; j++)
+        {
+            outArray[j] = sum;
+            sum += yearData[j].population; 
+        }   
+        outArray[outArray.length-1] = sum; 
+        
+        return outArray;
+    }
+    
+    var dataPoint = function(key, year, lookup)
+    {
+        var retVal = {};
+        retVal.id = key;
+        retVal.rect = orig[key];
+        retVal.usage = lookup[key].data[year - lookup[key].base][0];
+        retVal.perCap = lookup[key].data[year - lookup[key].base][1];
+        retVal.population = Population[key].data[year - Population[key].base];
+        //retVal.info =   lookup[key].name+", "+year+"\nPopulation: "+pString[key].data[year - pString[key].base]+"\nTotal Usage: "+retVal.usage+" MtCO2\nPer Person: "+retVal.perCap+" Tons\n"; 
+        
+        return retVal;
+
+    }
+    
+    var cmp1 = function(x, y)
+    {
+        return x.usage - y.usage;    
+    }
+    var cmp2 = function(x, y)
+    {
+        return x.perCap - y.perCap;
+    }
+    var cmp3 = function(x, y)
+    {
+        return x.population - y.population;
+    }
+     
+    var insert = function(dataPoint, mode, dataset)
+    {
+        if (mode == 0)
+        {
+            cmp = cmp1;
+        }
+        else if (mode == 1)
+        {
+            cmp = cmp2;
+        }
+        else if (mode == 2)
+        {
+            cmp = cmp3;
+        }
+
+        for(var j = 0; j < dataset.length; j++)
+        {
+            if(cmp(dataPoint,dataset[j])> 0)
+                break;
+        
+        }
+
+        dataset.splice(j,0,dataPoint);
+            
+    } 
+     
+     
+    var setUpAnimation = function()
+     {
+        dataset = new Array();
+        cPops = new Array();
+        var maxPop = -1;
+        var maxperCap = -1;
+        
+        for(var year = 1960; year < 2012; year++)
+        {
+            var yearData = new Array();
+            
+            for(var l = 0; l < big15.length; l++)
+            {
+                var dp = dataPoint(big15[l], year, TotalCO2);
+                if (dp.perCap > maxperCap)
+                {
+                    maxperCap = dp.perCap;
+                }
+                insert(dp,0,yearData);                
+            }
+            var cp = cPop(yearData);
+            
+            if (cp[cp.length-1]>maxPop)
+            {
+                maxPop = cp[cp.length-1];
+            }
+            
+            var origDataOrder = new Array(yearData.length)
+            for(var l = 0; l < big15.length; l++)
+            {
+                origDataOrder[yearData[l].rect] = yearData[l];
+                origDataOrder[yearData[l].rect].yearOrder = l;
+            }
+            dataset.push(origDataOrder); 
+            cPops.push(cp);
+        } 
+
+        axscale = d3.scale.linear().domain([0,maxPop]).range([0,plotw-100]);    
+        ayscale = d3.scale.linear().domain([0,maxperCap]).range([0,ploth]);
+     }
+     
+     setUpAnimation();
+     
+     var ghgplot = d3.select("body").append("svg").attr("width", plotw).attr("height", svgh);
+     
+    plotData = dataset[0]
+    
+    
+       ghgplot.selectAll("rect")
+                .data(dataset[animYear-1960])
+                .enter()
+                .append("rect")
+                .attr("y", function(input, i){return ploth - ayscale(input.perCap);})
+                .attr("width", function(input){return axscale(input.population);})
+                .attr("height", function(input){return ayscale(input.perCap);})
+                .attr("fill", function(input){ return colours[input.id];})
+                .attr("fill-opacity", 0.25)
+                .attr("x", function(input, i){ return 100 +  axscale(cPops[animYear - 1960][input.yearOrder]);});
+     
+
+
+
+    var plotYear = function()
+     {
+        plotData = dataset[animYear - 1960];
+        
+       
+        ghgplot.selectAll("rect")
+                .data(plotData)
+                .transition()
+                .attr("y", function(input){ return (ploth - ayscale(input.perCap));})
+                .attr("width", function(input){return axscale(input.population);})
+                .attr("height", function(input){return ayscale(input.perCap);})
+                .attr("fill", function(input){ return colours[input.id];})
+                .attr("fill-opacity", 0.25)
+                .attr("stroke", 2)
+                .attr("x", function(input, i){ return 100 + axscale(cPops[animYear - 1960][input.yearOrder]);});
+
+        animYear += 1;
+        if (animYear == 2012)
+        {
+            animYear = 1965;
+        }     
+     
+     } 
+       
+     setInterval(plotYear, 800);
+          
+    </script>
+
+</body>
+</html>
