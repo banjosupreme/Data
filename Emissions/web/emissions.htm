@@ -1,3 +1,4 @@
+
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -21,12 +22,12 @@
                  Indonesia: 15, Turkey: 16, Netherlands: 17, SaudiArabia: 18, Switzerland: 19, Iran: 20, Sweden: 21, Norway: 22, Poland: 23, Belgium: 24, Argentina: 25, Austria: 26, Thailand: 27, SouthAfrica: 28, UnitedArabEmirates: 29};
                     
      var axscale, ayscale;
-     var animYear = 1965;
+     var animYear = 1960;
      
      var plotw = 0.95*screen.width;
-     var ploth = 0.4*screen.height;
+     var ploth = 0.5*screen.height;
      var slack = 0.2*screen.height;
-     var svgh = 0.6*screen.height;
+     var svgh = 0.7*screen.height;
      
      var dataset, cPops;
      
@@ -55,7 +56,7 @@
         retVal.usage = lookup[key].data[year - lookup[key].base][0];
         retVal.perCap = lookup[key].data[year - lookup[key].base][1];
         retVal.population = Population[key].data[year - Population[key].base];
-        //retVal.info =   lookup[key].name+", "+year+"\nPopulation: "+pString[key].data[year - pString[key].base]+"\nTotal Usage: "+retVal.usage+" MtCO2\nPer Person: "+retVal.perCap+" Tons\n"; 
+        retVal.info =   lookup[key].name+", "+year+"\nPopulation: "+pString[key].data[year - pString[key].base]+"\nTotal Usage: "+retVal.usage+" MtCO2\nPer Person: "+retVal.perCap+" Tons\n"; 
         
         return retVal;
 
@@ -157,17 +158,48 @@
                 .attr("width", function(input){return axscale(input.population);})
                 .attr("height", function(input){return ayscale(input.perCap);})
                 .attr("fill", function(input){ return colours[input.id];})
+                .attr("stroke", function(input){ return colours[input.id];})
                 .attr("fill-opacity", 0.25)
-                .attr("x", function(input, i){ return 100 +  axscale(cPops[animYear - 1960][input.yearOrder]);});
+                .attr("stroke-width", 1)
+                .attr("x", function(input, i){ return 100 +  axscale(cPops[animYear - 1960][input.yearOrder]);})
+                .on("mouseover", function(input) {
+                    //got this function here https://github.com/alignedleft/d3-book/blob/master/chapter_10/13_svg_tooltip.html
+
+					ghgplot.append("text")
+					   .attr("id", "tooltip")
+					   .attr("text-anchor", "middle")
+					   .attr("font-family", "sans-serif")
+					   .attr("font-size", "11px")
+					   .attr("font-weight", "bold")
+					   .attr("fill", "black")
+					   .text(input.info);
+
+			   })
+			   .on("mouseout", function() {
+
+					d3.select("#tooltip").remove();
+					
+			   })
+                
+                
+                
+                .append("title").text(function(input){return input.info;});
      
 
 
 
     var plotYear = function()
      {
+     
+        animYear += 1;
+        if (animYear == 2012)
+        {
+            animYear = 1960;
+        }     
         plotData = dataset[animYear - 1960];
         
-       
+        
+        
         ghgplot.selectAll("rect")
                 .data(plotData)
                 .transition()
@@ -176,18 +208,18 @@
                 .attr("height", function(input){return ayscale(input.perCap);})
                 .attr("fill", function(input){ return colours[input.id];})
                 .attr("fill-opacity", 0.25)
-                .attr("stroke", 2)
+                .attr("stroke", function(input){ return colours[input.id];})
+                .attr("stroke-width", 1)
                 .attr("x", function(input, i){ return 100 + axscale(cPops[animYear - 1960][input.yearOrder]);});
+                
+        ghgplot.selectAll("rect").select("title").text(function(input,i){return input.info;});
+                
 
-        animYear += 1;
-        if (animYear == 2012)
-        {
-            animYear = 1965;
-        }     
+
      
      } 
        
-     setInterval(plotYear, 800);
+     setInterval(plotYear, 1000);
           
     </script>
 
