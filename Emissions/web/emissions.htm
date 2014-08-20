@@ -10,6 +10,8 @@
 </head>
 <body>
     <script type = "text/javascript">
+    
+    //started with one plot now there's a lot of copy-paste for the 2nd. Need to clean this up. 
 
      var big15 = ["UnitedStatesofAmerica", "China", "Japan", "Germany", "France", "UnitedKingdom","Brazil","RussianFederation","Italy","India","Canada","Australia","Spain","Mexico", "KoreaSouth",
                     "Indonesia", "Turkey", "Netherlands", "SaudiArabia", "Switzerland", "Iran" , "Sweden", "Norway", "Poland","Belgium", "Argentina", "Austria", "Thailand", "SouthAfrica", "UnitedArabEmirates"];
@@ -21,8 +23,10 @@
      var orig = {UnitedStatesofAmerica: 0, China: 1, Japan: 2, Germany: 3, France: 4, UnitedKingdom: 5,Brazil: 6,RussianFederation: 7,Italy: 8,India: 9,Canada: 10,Australia: 11,Spain: 12,Mexico: 13, KoreaSouth: 14,
                  Indonesia: 15, Turkey: 16, Netherlands: 17, SaudiArabia: 18, Switzerland: 19, Iran: 20, Sweden: 21, Norway: 22, Poland: 23, Belgium: 24, Argentina: 25, Austria: 26, Thailand: 27, SouthAfrica: 28, UnitedArabEmirates: 29};
                     
-     var axscale, ayscale;
+     var axscale, ayscale, axscaleTotal, ayscaleTotal;
      var animYear = 1960;
+     var totalYear = 1990;
+     var totalBase = 1990;
      
      var plotw = 0.95*screen.width;
      var ploth = 0.5*screen.height;
@@ -30,6 +34,7 @@
      var svgh = 0.7*screen.height;
      
      var dataset, cPops;
+     var datasetTotal, cPopsTotal;
      
      var plotData;
      
@@ -56,7 +61,7 @@
         retVal.usage = lookup[key].data[year - lookup[key].base][0];
         retVal.perCap = lookup[key].data[year - lookup[key].base][1];
         retVal.population = Population[key].data[year - Population[key].base];
-        retVal.info =   lookup[key].name+", "+year+"\nPopulation: "+pString[key].data[year - pString[key].base]+"\nTotal Usage: "+retVal.usage+" MtCO2\nPer Person: "+retVal.perCap+" Tons\n"; 
+        retVal.info =   lookup[key].name+", "+year+"\nPopulation: "+pString[key].data[year - pString[key].base]+"\nTotal Emissions: "+retVal.usage+" MtCO2\nPer Person: "+retVal.perCap+" Tons\n"; 
         
         return retVal;
 
@@ -102,7 +107,7 @@
     } 
      
      
-    var setUpAnimation = function()
+    var setUpCO2Animation = function()
      {
         dataset = new Array();
         cPops = new Array();
@@ -143,11 +148,54 @@
         ayscale = d3.scale.linear().domain([0,maxperCap]).range([0,ploth]);
      }
      
-     setUpAnimation();
+     var setUpGHGAnimation = function()
+     {
+        datasetTotal = new Array();
+        cPopsTotal = new Array();
+        var maxPop = -1;
+        var maxperCap = -1;
+        
+        for(var year = 1990; year < 2012; year++)
+        {
+            var yearData = new Array();
+            
+            for(var l = 0; l < big15.length; l++)
+            {
+                var dp = dataPoint(big15[l], year, TotalCO2);
+                if (dp.perCap > maxperCap)
+                {
+                    maxperCap = dp.perCap;
+                }
+                insert(dp,0,yearData);                
+            }
+            var cp = cPop(yearData);
+            
+            if (cp[cp.length-1]>maxPop)
+            {
+                maxPop = cp[cp.length-1];
+            }
+            
+            var origDataOrder = new Array(yearData.length)
+            for(var l = 0; l < big15.length; l++)
+            {
+                origDataOrder[yearData[l].rect] = yearData[l];
+                origDataOrder[yearData[l].rect].yearOrder = l;
+            }
+            datasetTotal.push(origDataOrder); 
+            cPopsTotal.push(cp);
+        } 
+
+        axscaleTotal = d3.scale.linear().domain([0,maxPop]).range([0,plotw-100]);    
+        ayscaleTotal = d3.scale.linear().domain([0,maxperCap]).range([0,ploth]);
+     }
+     
+     setUpCO2Animation();
+     setUpGHGAnimation();
      
      var ghgplot = d3.select("body").append("svg").attr("width", plotw).attr("height", svgh);
-     
-    plotData = dataset[0]
+     var totalplot = d3.select("body").append("svg").attr("width", plotw).attr("height", svgh);
+      
+    
     
     
        ghgplot.selectAll("rect")
@@ -162,6 +210,42 @@
                 .attr("fill-opacity", 0.25)
                 .attr("stroke-width", 1)
                 .attr("x", function(input, i){ return 100 +  axscale(cPops[animYear - 1960][input.yearOrder]);})
+                .on("mouseover", function(input) {
+                    //got this function here https://github.com/alignedleft/d3-book/blob/master/chapter_10/13_svg_tooltip.html
+
+					ghgplot.append("text")
+					   .attr("id", "tooltip")
+					   .attr("text-anchor", "middle")
+					   .attr("font-family", "sans-serif")
+					   .attr("font-size", "11px")
+					   .attr("font-weight", "bold")
+					   .attr("fill", "black")
+					   .text(input.info);
+
+			   })
+			   .on("mouseout", function() {
+
+					d3.select("#tooltip").remove();
+					
+			   })
+                
+                
+                
+                .append("title").text(function(input){return input.info;});
+                
+                
+           totalplot.selectAll("rect")
+                .data(datasetTotal[totalYear-1990])
+                .enter()
+                .append("rect")
+                .attr("y", function(input, i){return ploth - ayscaleTotal(input.perCap);})
+                .attr("width", function(input){return axscaleTotal(input.population);})
+                .attr("height", function(input){return ayscaleTotal(input.perCap);})
+                .attr("fill", function(input){ return colours[input.id];})
+                .attr("stroke", function(input){ return colours[input.id];})
+                .attr("fill-opacity", 0.25)
+                .attr("stroke-width", 1)
+                .attr("x", function(input, i){ return 100 +  axscaleTotal(cPopsTotal[totalYear - 1990][input.yearOrder]);})
                 .on("mouseover", function(input) {
                     //got this function here https://github.com/alignedleft/d3-book/blob/master/chapter_10/13_svg_tooltip.html
 
@@ -218,8 +302,42 @@
 
      
      } 
+     
+     
+     var plotYearTotal = function()
+     {
+     
+        totalYear += 1;
+        if (totalYear == 2012)
+        {
+            totalYear = totalBase;
+        }     
+        plotData = datasetTotal[totalYear - totalBase];
+        
+        
+        
+        totalplot.selectAll("rect")
+                .data(plotData)
+                .transition()
+                .attr("y", function(input){ return (ploth - ayscaleTotal(input.perCap));})
+                .attr("width", function(input){return axscaleTotal(input.population);})
+                .attr("height", function(input){return ayscaleTotal(input.perCap);})
+                .attr("fill", function(input){ return colours[input.id];})
+                .attr("fill-opacity", 0.25)
+                .attr("stroke", function(input){ return colours[input.id];})
+                .attr("stroke-width", 1)
+                .attr("x", function(input, i){ return 100 + axscaleTotal(cPopsTotal[totalYear - totalBase][input.yearOrder]);});
+                
+        totalplot.selectAll("rect").select("title").text(function(input,i){return input.info;});
+                
+
+
+     
+     } 
        
      setInterval(plotYear, 1200);
+     setInterval(plotYearTotal, 1200);
+     
           
     </script>
 
