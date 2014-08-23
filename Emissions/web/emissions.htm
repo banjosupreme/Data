@@ -1,10 +1,9 @@
-
-
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <title></title>
-    <link rel="stylesheet" href="wally.css">
+    <link href='http://fonts.googleapis.com/css?family=Arvo' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="thecssfile.css">
     <script type = "text/javascript" src ="d3/d3.js"></script>
     <script type="text/javascript" src="emissions.data.js"></script>
 
@@ -51,6 +50,7 @@
     var CH4base = 1990;
     var N2Obase = 1990;
     var FGasbase = 1990;
+    var animTime = 1000;
     
     
     var CO2end = 2012;
@@ -58,7 +58,7 @@
     var CH4end = 2012;
     var N2Oend = 2012;
     var FGasend = 2012;
-  
+
     var cPop = function(yearData)
     {
         var outArray = new Array(yearData.length + 1);
@@ -268,14 +268,27 @@
      </script>
      
      
-     This text should come before all the plots <br>
+     <H1>Total Greenhouse Gas Emissions </H1> <br>
      
+
+<h2>Top Countries by Total Greenhouse Gas Emissions</h2>
     
     <script type = "text/javascript">
 
         
     var Totaldata = setUpAnimation(Total30,TotalGHG, totalbase, totalend, "e", 0);
         var totalplot = initialPlot(Totaldata);
+        
+        var tlabel = totalplot.append("text")
+                        .attr("class", "year label")
+                        .attr("text-anchor", "end")
+                        .attr("y", ploth/2)
+                        .attr("x", plotw/2)
+                        .text(totalbase);
+                        
+        var tbox = tlabel.node().getBBox();
+    
+    
          
         var tyear = Totaldata.base + 1;
          
@@ -284,20 +297,28 @@
             if (tyear==totalend)
                 tyear = Totaldata.base;
             plotYear(Totaldata, tyear, totalplot);
+            tlabel.text(tyear);
             tyear+=1;
+            
          }
           
-         setInterval(animtotal, 2000); 
+         setInterval(animtotal, animTime); 
     </script><br>
-    
+
+<h2>Top Countries by Greenhouse Gas Emissions per Capita</h2>    
     <script type = "text/javascript">
         
-
-     
-     
-    
         var Totalh10data = setUpAnimation(totalhigh10,TotalGHG, totalbase, totalend, "e", 1);
         var totalh10plot = initialPlot(Totalh10data);
+        
+         var t10label = totalh10plot.append("text")
+                        .attr("class", "year label")
+                        .attr("text-anchor", "end")
+                        .attr("y", ploth/2)
+                        .attr("x", plotw/2)
+                        .text(totalbase);
+                        
+        var t10box = t10label.node().getBBox();
          
         var t10year = Totalh10data.base + 1;
          
@@ -306,22 +327,33 @@
             if (t10year==totalend)
                 t10year = Totalh10data.base;
             plotYear(Totalh10data, t10year, totalh10plot);
+            t10label.text(t10year);
             t10year+=1;
          }
           
-         setInterval(animtotal10, 2000);
+         setInterval(animtotal10, animTime);
           
     </script><br>
     
     <hr> 
-    CO2
+   <h2>Carbon Dioxide</h2> 
 
-    
+   <h3>Top Countries by Total Carbon Dioxide Emissions</h3><br>  
          <script type = "text/javascript">
          
          var CO2data = setUpAnimation(CO230,TotalCO2,CO2base,CO2end,"", 0);
 
          var CO2plot = initialPlot(CO2data);
+         
+         var clabel = CO2plot.append("text")
+                        .attr("class", "year label")
+                        .attr("text-anchor", "end")
+                        .attr("y", ploth/2)
+                        .attr("x", plotw/2)
+                        .text(CO2base);
+                        
+        var cbox = clabel.node().getBBox();
+         
          
          var cyear = CO2data.base + 1;
          
@@ -330,23 +362,34 @@
             if (cyear==CO2end)
                 cyear = CO2data.base;
             plotYear(CO2data, cyear, CO2plot);
+            clabel.text(cyear);
             cyear+=1;
          }
          
            
-         setInterval(animCO2, 2000);
+         setInterval(animCO2, animTime);
 
      
     </script><br>
     
-    Anything<br>
-    
+   <h3>Top Countries by Carbon Dioxide Emissions per Capita</h3><br> 
     <script type = "text/javascript">
          
          
          var CO2h10data = setUpAnimation(CO2high10,TotalCO2,CO2base,CO2end,"", 1);
 
          var CO2h10plot = initialPlot(CO2h10data);
+         
+         
+        var c10label = CO2h10plot.append("text")
+                        .attr("class", "year label")
+                        .attr("text-anchor", "end")
+                        .attr("y", ploth/2)
+                        .attr("x", plotw/2)
+                        .text(CO2base);
+                        
+        var c10box = c10label.node().getBBox();    
+         
          
          var c10year = CO2h10data.base + 1;
          
@@ -355,23 +398,36 @@
             if (c10year==CO2end)
                 c10year = CO2h10data.base;
             plotYear(CO2h10data, c10year, CO2h10plot);
+            c10label.text(c10year);
             c10year+=1;
          }
          
            
-         setInterval(anim10CO2, 2000);
+         setInterval(anim10CO2, animTime);
 
      
     </script><br>
     
     <hr>
     
-CH4
+    <h2>Methane</h2>
+
+    <h3>Top Countries by Total Methane Emissions</h3><br>
     
     <script type = "text/javascript">
    
         var CH4data = setUpAnimation(CH430,TotalCH4, CH4base, CH4end, "e", 0);
         var ch4plot = initialPlot(CH4data);
+        
+        
+         var ch4label = ch4plot.append("text")
+                        .attr("class", "year label")
+                        .attr("text-anchor", "end")
+                        .attr("y", ploth/2)
+                        .attr("x", plotw/2)
+                        .text(CH4base);
+                        
+        var ch4box = ch4label.node().getBBox();   
          
         var chyear = CH4data.base + 1;
          
@@ -380,22 +436,31 @@ CH4
             if (chyear==CH4end)
                 chyear = CH4data.base;
             plotYear(CH4data, chyear, ch4plot);
+            ch4label.text(chyear);
             chyear+=1;
          }
            
-         setInterval(animch4, 2000); 
+         setInterval(animch4, animTime); 
           
     </script><br>
     
     
 
-    
-    That should be CH4<br>
+    <h4>Removing two outliers(Kuwait and Libya) from the previous plot</h4><br>
     
         <script type = "text/javascript">
   
         var CH4xodata = setUpAnimation(CH430xo,TotalCH4, CH4base, CH4end, "e", 0);
         var ch4xoplot = initialPlot(CH4xodata);
+        
+                 var ch4xolabel = ch4xoplot.append("text")
+                        .attr("class", "year label")
+                        .attr("text-anchor", "end")
+                        .attr("y", ploth/2)
+                        .attr("x", plotw/2)
+                        .text(CH4base);
+                        
+        var ch4xobox = ch4xolabel.node().getBBox();  
          
         var chxoyear = CH4xodata.base + 1;
          
@@ -404,18 +469,30 @@ CH4
             if (chxoyear==CH4end)
                 chxoyear = CH4xodata.base;
             plotYear(CH4xodata, chxoyear, ch4xoplot);
+            ch4xolabel.text(chxoyear);
             chxoyear+=1;
          }
            
-         setInterval(animch4xo, 2000); 
+         setInterval(animch4xo, animTime); 
           
     </script><br>
-    
+   
+    <h3>Top Countries by Methane Emissions per Capita</h3><br> 
     
     <script type = "text/javascript">
    
         var CH4high10data = setUpAnimation(CH4high10,TotalCH4, CH4base, CH4end, "e", 1);
         var ch4plot10 = initialPlot(CH4high10data);
+        
+         var ch410label = ch4plot10.append("text")
+                        .attr("class", "year label")
+                        .attr("text-anchor", "end")
+                        .attr("y", ploth/2)
+                        .attr("x", plotw/2)
+                        .text(CH4base);
+                        
+        var ch410box = ch410label.node().getBBox(); 
+        
          
         var ch10year = CH4high10data.base + 1;
          
@@ -424,21 +501,33 @@ CH4
             if (ch10year==CH4end)
                 ch10year = CH4high10data.base;
             plotYear(CH4high10data, ch10year, ch4plot10);
+            ch410label.text(ch10year);
+            
             ch10year+=1;
          }
            
-         setInterval(anim10ch4, 2000); 
+         setInterval(anim10ch4, animTime); 
           
     </script><br>
     
     <hr>
     
-    Nitrous Oxide <br>
-    
+    <h2>Nitrous Oxide</h2><br>
+
+    <h3>Top Countries by Total Nitrous Oxide Emissions</h3><br>    
      <script type = "text/javascript">
 
       var N2Odata = setUpAnimation(N2030, TotalN2O, N2Obase, N2Oend, "e", 0);
        var nplot = initialPlot(N2Odata);
+       
+      var nlabel = nplot.append("text")
+                        .attr("class", "year label")
+                        .attr("text-anchor", "end")
+                        .attr("y", ploth/2)
+                        .attr("x", plotw/2)
+                        .text(N2Obase);
+                        
+        var nbox = nlabel.node().getBBox(); 
          
         var nyear = N2Odata.base + 1;
          
@@ -449,20 +538,30 @@ CH4
                 nyear = N2Odata.base;
             }
             plotYear(N2Odata, nyear, nplot);
+            nlabel.text(nyear);
             nyear+=1;
          }
         
            
-         setInterval(animn2o, 2000); 
+         setInterval(animn2o, animTime); 
                                         
     
     </script><br>
-    Nitrous Oxide without the outliers <br>
     
+    <h4>Removing an outlier(Central African Republic) from the previous plot</h4><br> 
     <script type = "text/javascript">
  
      var N2Oxodata = setUpAnimation(N2030xo, TotalN2O, N2Obase, N2Oend, "e", 0);
        var nxoplot = initialPlot(N2Oxodata);
+       
+             var nxolabel = nxoplot.append("text")
+                        .attr("class", "year label")
+                        .attr("text-anchor", "end")
+                        .attr("y", ploth/2)
+                        .attr("x", plotw/2)
+                        .text(N2Obase);
+                        
+        var nxobox = nxolabel.node().getBBox(); 
          
         var nxoyear = N2Oxodata.base + 1;
          
@@ -473,20 +572,31 @@ CH4
                 nxoyear = N2Oxodata.base;
             }
             plotYear(N2Oxodata, nxoyear, nxoplot);
+            nxolabel.text(nxoyear);
             nxoyear+=1;
          }
         
            
-         setInterval(animn2oxo, 2000); 
+         setInterval(animn2oxo, animTime); 
                                         
     
     </script><br>
 
+<h3>Top countries by Emissions of Nitrous Oxide per Capita</h3>
     
          <script type = "text/javascript">
 
         var N2Ohigh10data = setUpAnimation(N2Ohigh10, TotalN2O, N2Obase, N2Oend, "e", 1);
         var n10plot = initialPlot(N2Ohigh10data);
+        
+       var n10label = n10plot.append("text")
+                        .attr("class", "year label")
+                        .attr("text-anchor", "end")
+                        .attr("y", ploth/2)
+                        .attr("x", plotw/2)
+                        .text(N2Obase);
+                        
+        var n10box = n10label.node().getBBox(); 
          
         var n10year = N2Odata.base + 1;
          
@@ -497,24 +607,36 @@ CH4
                 n10year = N2Ohigh10data.base;
             }
             plotYear(N2Ohigh10data, n10year, n10plot);
+            n10label.text(n10year);
             n10year+=1;
          }
         
            
-         setInterval(anim10n2o, 2000); 
+         setInterval(anim10n2o, animTime); 
                                         
     
     </script><br>
     
 <hr>
-    
-    F-Gas below. <br>
+   
+<h2>Fluorinated Gases</h2> 
+
+<h3>Top Countries by Total Emissions of Fluorinated Gases</h3>
     
     <script type = "text/javascript">
 
        
         var FGasdata = setUpAnimation(FGas30, TotalFGas,FGasbase, FGasend,"e", 0);
         var fgasplot = initialPlot(FGasdata);
+        
+       var flabel = fgasplot.append("text")
+                        .attr("class", "year label")
+                        .attr("text-anchor", "end")
+                        .attr("y", ploth/2)
+                        .attr("x", plotw/2)
+                        .text(FGasbase);
+                        
+        var fbox = flabel.node().getBBox(); 
          
         var fyear = FGasdata.base + 1;
          
@@ -525,19 +647,30 @@ CH4
                 fyear = FGasdata.base;
             }
             plotYear(FGasdata, fyear, fgasplot);
+            flabel.text(fyear);
             fyear+=1;
          }
         
            
-         setInterval(animfgas, 2000); 
+         setInterval(animfgas, animTime); 
      
     </script><br>
     
+<h3>Top Countries by Emissions of Fluorinated Gases per Capita</h3>
     
         <script type = "text/javascript">
 
-        var FGashigh10data = setUpAnimation(FGashigh10, TotalFGas,FGasbase, FGasend,"e", 0);
+        var FGashigh10data = setUpAnimation(FGashigh10, TotalFGas,FGasbase, FGasend,"e", 1);
         var fgasplot10 = initialPlot(FGashigh10data);
+        
+           var f10label = fgasplot10.append("text")
+                        .attr("class", "year label")
+                        .attr("text-anchor", "end")
+                        .attr("y", ploth/2)
+                        .attr("x", plotw/2)
+                        .text(FGasbase);
+                        
+        var f10box = f10label.node().getBBox(); 
          
         var f10year = FGashigh10data.base + 1;
          
@@ -548,15 +681,15 @@ CH4
                 f10year = FGasdata.base;
             }
             plotYear(FGashigh10data, f10year, fgasplot10);
+            f10label.text(f10year);
             f10year+=1;
          }
         
            
-         setInterval(anim10fgas, 2000); 
+         setInterval(anim10fgas, animTime); 
      
     </script><br>
     
-F-Gas
     
 </body>
 </html>
