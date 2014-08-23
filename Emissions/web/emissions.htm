@@ -24,7 +24,12 @@
      var CH430xo=["China","UnitedStatesofAmerica","RussianFederation","India","Brazil","Indonesia","Nigeria","Mexico","Angola","Australia","Canada","Pakistan","Iraq","Uzbekistan","Argentina","Sudan","Iran","Myanmar","Vietnam","Thailand","Ukraine","Ethiopia","Malaysia","France","Venezuela","DemRepofCongo","Colombia","Turkey"];
      var N2030xo=["China","UnitedStatesofAmerica","Brazil","Indonesia","RussianFederation","DemRepofCongo","India","Argentina","France","Cameroon","Angola","Myanmar","Germany","Sudan","Canada","Pakistan","Ethiopia","Zambia","Iran","Colombia","UnitedKingdom","Burundi","Madagascar","Australia","Nigeria","Italy","Ukraine","Spain","Tanzania"];
      
-    
+     var totalhigh10 = ["Kuwait", "Brunei", "Belize", "Qatar", "EquatorialGuinea", "Oman", "TrinidadTobago", "Australia", "Canada", "UnitedArabEmirates"]; 
+     var CO2high10 = ["Qatar", "TrinidadTobago", "Kuwait", "Brunei", "Oman", "Luxembourg", "UnitedArabEmirates","Australia","Bahrain","SaudiArabia"];
+     var CH4high10 = ["Kuwait", "Brunei", "Belize", "EquatorialGuinea", "Grenada", "Libya", "Oman", "Turkmenistan", "Barbados", "CentralAfricanRepublic"];
+     var N2Ohigh10 = ["CentralAfricanRepublic", "Burundi", "Angola", "Cameroon", "Zambia", "Brunei", "NewZealand", "Uruguay", "Mongolia", "Bolivia"];
+     var FGashigh10 = ["AntiguaBarbuda", "Israel", "Montenegro", "Kuwait", "Malta", "UnitedStatesofAmerica", "KoreaSouth", "Singapore","Australia","Japan"];
+     
     
     
     var colours = {UnitedStatesofAmerica: "#1f77b4", China: "#ff7f0e", Japan: "#0033FF", Germany: "#9933CC", France: "#A27AFE", UnitedKingdom: "#8c564b",Brazil: "#e377c2",RussianFederation: "#CC6666",Italy: "#bcbd22",
@@ -32,7 +37,9 @@
                     Switzerland: "#008B8B", Iran: "#d62728", Sweden: "#FFFF00", Algeria: "#000066", Poland: "#CC3333", Belgium: "#00CC00", Argentina: "#2ca02c", Austria: "#660000", Thailand: "#6600FF" , SouthAfrica: "#FFCC66", 
                     UnitedArabEmirates: "#B9264F", Angola: "#FFE920", Burundi: "#FF800D", Cameroon: "#D1A0A0", CentralAfricanRepublic: "#93EEAA", Colombia: "#FF4AFF", DemRepofCongo: "#B6BA18", Egypt: "#FF4848", Ethiopia: "#E469FE",
                     Iran: "#FF73B9", Iraq: "#FFE920", Israel: "#FFBD82", Kazakhstan:"#F70000", Kuwait: "#FFC4FF", Libya: "#27DE55", Madagascar: "#BABA21", Myanmar: "#93BF96", Nigeria: "#DB00DB", Pakistan: "#75ECFD", Philippines: "#FF9797",
-                    Singapore: "#D97BFD", Sudan: "#9A03FE", Tanzania: "#FF9C42", Ukraine: "#C27E3A", Uzbekistan: "#C48484", Venezuela: "#FFD34F", Vietnam: "#79FC4E", Zambia: "#F900F9", Malaysia: "#DAAF85"};
+                    Singapore: "#D97BFD", Sudan: "#9A03FE", Tanzania: "#FF9C42", Ukraine: "#C27E3A", Uzbekistan: "#C48484", Venezuela: "#FFD34F", Vietnam: "#79FC4E", Zambia: "#F900F9", Malaysia: "#DAAF85",
+                    Brunei: "#FFF06A", Belize: "#29AFD6" ,Qatar: "#FF8A8A", EquatorialGuinea: "#B05F3C", Oman: "#DFDF00",TrinidadTobago: "#F70000",Luxembourg: "#E469FE", Bahrain: "#48FB0D", Grenada: "#FFB60B",
+                    Turkmenistan: "#FF2DFF",Barbados: "#5757FF", NewZealand: "#C8B400", Uruguay: "#23819C",Mongolia: "#FF68DD", Bolivia: "#FF9331", Malta: "#FF5353", Montenegro: "#3DE4FC", AntiguaBarbuda: "#5EAE9E" } ;
                     
     var plotw = 0.95*window.innerWidth;
     var ploth = 0.5*window.innerHeight;
@@ -67,7 +74,7 @@
         return outArray;
     }
     
-    var dataPoint = function(key, year, lookup, orig)
+    var dataPoint = function(key, year, lookup, orig, equiv)
     {
         var retVal = {};
         retVal.id = key;
@@ -75,11 +82,26 @@
         retVal.usage = lookup[key].data[year - lookup[key].base][0];
         retVal.perCap = lookup[key].data[year - lookup[key].base][1];
         retVal.population = Population[key].data[year - Population[key].base];
-        retVal.info =   lookup[key].name+", "+year+"\nPopulation: "+pString[key].data[year - pString[key].base]+"\nTotal Emissions: "+retVal.usage+" MtCO2\nPer Person: "+retVal.perCap+" Tons\n"; 
+        retVal.info =   lookup[key].name+", "+year+"\nPopulation: "+pString[key].data[year - pString[key].base]+"\nTotal Emissions: "+retVal.usage+" MtCO2" + equiv+ "\nPer Person: "+retVal.perCap+" Tons\n"; 
         
         return retVal;
 
     }
+    
+    var createZeroData = function(key, orig)
+    {
+        var retVal = {};
+        retVal.id = key;
+        retVal.rect = orig[key];
+        retVal.usage = 0;
+        retVal.perCap = 0;
+        retVal.population = 0;
+        retVal.info =  "";
+        
+        return retVal;
+    
+    }
+        
     
     var cmp1 = function(x, y)
     {
@@ -119,9 +141,9 @@
         data.splice(j,0,dataPoint);
             
     } 
+    
      
-     
-    var setUpAnimation = function(countries,dataSource,base,stop)
+    var setUpAnimation = function(countries,dataSource,base,stop,equiv, mode)
      {
         dataset = {};
         dataset.data = new Array();
@@ -146,16 +168,20 @@
             
             for(var l = 0; l < countries.length; l++)
             {
-                if (year < dataSource[countries[l].base])
+                var dp;
+                if (year < dataSource[countries[l]].base)
                 {
-                    continue;
+                    dp = createZeroData(countries[l], orig);
                 }
-                var dp = dataPoint(countries[l], year, dataSource, orig);
-                if (dp.perCap > maxperCap)
+                else
                 {
-                    maxperCap = dp.perCap;
+                    dp = dataPoint(countries[l], year, dataSource, orig,equiv);
+                    if (dp.perCap > maxperCap)
+                    {
+                        maxperCap = dp.perCap;
+                    }
                 }
-                insert(dp,0,yearData);                
+                insert(dp,mode,yearData);                
             }
             
             var cp = cPop(yearData);
@@ -244,9 +270,56 @@
      
      This text should come before all the plots <br>
      
-     <script type = "text/javascript">
+    
+    <script type = "text/javascript">
+
+        
+    var Totaldata = setUpAnimation(Total30,TotalGHG, totalbase, totalend, "e", 0);
+        var totalplot = initialPlot(Totaldata);
          
-         var CO2data = setUpAnimation(CO230,TotalCO2,CO2base,CO2end);
+        var tyear = Totaldata.base + 1;
+         
+         var animtotal = function()
+         {
+            if (tyear==totalend)
+                tyear = Totaldata.base;
+            plotYear(Totaldata, tyear, totalplot);
+            tyear+=1;
+         }
+          
+         setInterval(animtotal, 2000); 
+    </script><br>
+    
+    <script type = "text/javascript">
+        
+
+     
+     
+    
+        var Totalh10data = setUpAnimation(totalhigh10,TotalGHG, totalbase, totalend, "e", 1);
+        var totalh10plot = initialPlot(Totalh10data);
+         
+        var t10year = Totalh10data.base + 1;
+         
+         var animtotal10 = function()
+         {
+            if (t10year==totalend)
+                t10year = Totalh10data.base;
+            plotYear(Totalh10data, t10year, totalh10plot);
+            t10year+=1;
+         }
+          
+         setInterval(animtotal10, 2000);
+          
+    </script><br>
+    
+    <hr> 
+    CO2
+
+    
+         <script type = "text/javascript">
+         
+         var CO2data = setUpAnimation(CO230,TotalCO2,CO2base,CO2end,"", 0);
 
          var CO2plot = initialPlot(CO2data);
          
@@ -266,34 +339,38 @@
      
     </script><br>
     
-    
-    OK, that should show the CO2 plot <br>
+    Anything<br>
     
     <script type = "text/javascript">
+         
+         
+         var CO2h10data = setUpAnimation(CO2high10,TotalCO2,CO2base,CO2end,"", 1);
 
-        
-       var Totaldata = setUpAnimation(Total30,TotalGHG, totalbase, totalend);
-        var totalplot = initialPlot(Totaldata);
+         var CO2h10plot = initialPlot(CO2h10data);
          
-        var tyear = Totaldata.base + 1;
+         var c10year = CO2h10data.base + 1;
          
-         var animtotal = function()
+         var anim10CO2 = function()
          {
-            if (tyear==totalend)
-                tyear = Totaldata.base;
-            plotYear(Totaldata, tyear, totalplot);
-            tyear+=1;
+            if (c10year==CO2end)
+                c10year = CO2h10data.base;
+            plotYear(CO2h10data, c10year, CO2h10plot);
+            c10year+=1;
          }
-          
-         setInterval(animtotal, 2000);
-          
+         
+           
+         setInterval(anim10CO2, 2000);
+
+     
     </script><br>
     
-    That should be the total<br>
+    <hr>
+    
+CH4
     
     <script type = "text/javascript">
    
-        var CH4data = setUpAnimation(CH430,TotalCH4, CH4base, CH4end);
+        var CH4data = setUpAnimation(CH430,TotalCH4, CH4base, CH4end, "e", 0);
         var ch4plot = initialPlot(CH4data);
          
         var chyear = CH4data.base + 1;
@@ -310,11 +387,14 @@
           
     </script><br>
     
+    
+
+    
     That should be CH4<br>
     
         <script type = "text/javascript">
-   
-        var CH4xodata = setUpAnimation(CH430xo,TotalCH4, CH4base, CH4end);
+  
+        var CH4xodata = setUpAnimation(CH430xo,TotalCH4, CH4base, CH4end, "e", 0);
         var ch4xoplot = initialPlot(CH4xodata);
          
         var chxoyear = CH4xodata.base + 1;
@@ -331,11 +411,33 @@
           
     </script><br>
     
-    Nitrous Oxide below<br>
+    
+    <script type = "text/javascript">
+   
+        var CH4high10data = setUpAnimation(CH4high10,TotalCH4, CH4base, CH4end, "e", 1);
+        var ch4plot10 = initialPlot(CH4high10data);
+         
+        var ch10year = CH4high10data.base + 1;
+         
+         var anim10ch4 = function()
+         {
+            if (ch10year==CH4end)
+                ch10year = CH4high10data.base;
+            plotYear(CH4high10data, ch10year, ch4plot10);
+            ch10year+=1;
+         }
+           
+         setInterval(anim10ch4, 2000); 
+          
+    </script><br>
+    
+    <hr>
+    
+    Nitrous Oxide <br>
     
      <script type = "text/javascript">
 
-       var N2Odata = setUpAnimation(N2030, TotalN2O, N2Obase, N2Oend);
+      var N2Odata = setUpAnimation(N2030, TotalN2O, N2Obase, N2Oend, "e", 0);
        var nplot = initialPlot(N2Odata);
          
         var nyear = N2Odata.base + 1;
@@ -351,7 +453,7 @@
          }
         
            
-         setInterval(animn2o, 2000);
+         setInterval(animn2o, 2000); 
                                         
     
     </script><br>
@@ -359,7 +461,7 @@
     
     <script type = "text/javascript">
  
-       var N2Oxodata = setUpAnimation(N2030xo, TotalN2O, N2Obase, N2Oend);
+     var N2Oxodata = setUpAnimation(N2030xo, TotalN2O, N2Obase, N2Oend, "e", 0);
        var nxoplot = initialPlot(N2Oxodata);
          
         var nxoyear = N2Oxodata.base + 1;
@@ -375,20 +477,43 @@
          }
         
            
-         setInterval(animn2oxo, 2000);
+         setInterval(animn2oxo, 2000); 
                                         
     
     </script><br>
 
     
+         <script type = "text/javascript">
 
+        var N2Ohigh10data = setUpAnimation(N2Ohigh10, TotalN2O, N2Obase, N2Oend, "e", 1);
+        var n10plot = initialPlot(N2Ohigh10data);
+         
+        var n10year = N2Odata.base + 1;
+         
+        var anim10n2o = function()
+        {
+            if (n10year==N2Oend)
+            {
+                n10year = N2Ohigh10data.base;
+            }
+            plotYear(N2Ohigh10data, n10year, n10plot);
+            n10year+=1;
+         }
+        
+           
+         setInterval(anim10n2o, 2000); 
+                                        
+    
+    </script><br>
+    
+<hr>
     
     F-Gas below. <br>
     
     <script type = "text/javascript">
 
-        
-        var FGasdata = setUpAnimation(FGas30, TotalFGas,FGasbase, FGasend);
+       
+        var FGasdata = setUpAnimation(FGas30, TotalFGas,FGasbase, FGasend,"e", 0);
         var fgasplot = initialPlot(FGasdata);
          
         var fyear = FGasdata.base + 1;
@@ -405,6 +530,29 @@
         
            
          setInterval(animfgas, 2000); 
+     
+    </script><br>
+    
+    
+        <script type = "text/javascript">
+
+        var FGashigh10data = setUpAnimation(FGashigh10, TotalFGas,FGasbase, FGasend,"e", 0);
+        var fgasplot10 = initialPlot(FGashigh10data);
+         
+        var f10year = FGashigh10data.base + 1;
+         
+        var anim10fgas = function()
+        {
+            if (f10year==FGasend)
+            {
+                f10year = FGasdata.base;
+            }
+            plotYear(FGashigh10data, f10year, fgasplot10);
+            f10year+=1;
+         }
+        
+           
+         setInterval(anim10fgas, 2000); 
      
     </script><br>
     
